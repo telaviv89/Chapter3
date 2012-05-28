@@ -1,2 +1,61 @@
-h2= title
+style
+    #hiddenCanvas {display: none}
+    #displayCanvas {
+        background-image: url(../../examples/santa.jpg);  
+        background-repeat: no-repeat; 
+    }
+.container
+    header#overview.jumbotron
+        h1 HTML5 Video with chroma-key
+
+    .row
+        .span5
+            video#sourceVideo(src='/examples/video.ogv', controls='true')
+            canvas#hiddenCanvas(width='320', height='192')
+        .span5
+            canvas#displayCanvas(width='320', height='192')
+
+script(type='text/javascript')
+    var sourceVideo = document.getElementById("sourceVideo");
+    var hiddenCanvas = document.getElementById("hiddenCanvas");
+    var displayCanvas = document.getElementById("displayCanvas");
+    var hiddenContext = hiddenCanvas.getContext ("2d");
+    var displayContext = displayCanvas.getContext ("2d");
+
+
+
+
+
+    sourceVideo.addEventListener('play', function(){runAnalysis();});
+
+    var runAnalysis = function(){
+         if(sourceVideo.paused || sourceVideo.ended){
+          return
+        }
+        frameConversion();
+        setTimeout(function() {
+                runAnalysis();
+            }, 0);
+         };
+
+        var frameConversion = function(){
+        
+        hiddenContext.drawImage(sourceVideo,0,0,sourceVideo.videoWidth, sourceVideo.videoHeight);
+        
+        var frame = hiddenContext.getImageData(0,0,sourceVideo.videoWidth, sourceVideo.videoHeight);
+        
+        var length = frame.data.length;
+        for (var i =0; i <length; i++){
+            var r = frame.data [i * 4 + 0];
+        var g = frame.data [i * 4 + 1];
+        var b = frame.data [i * 4 + 2];
+        
+        if(g > 100 && r > 100 && b < 43){  
+        frame.data[i * 4 + 3] = 0; 
+        } 
+            }
+        displayContext.putImageData(frame, 0, 0);
+        return
+        };
+
 
