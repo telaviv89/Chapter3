@@ -68,7 +68,8 @@ var app = module.exports = express.createServer();
 	
 	app.get('/example2', routes.example2);
 	app.get('/example3', routes.example3);
-
+    app.get('/example4', routes.example4);
+    app.get('/example5', routes.example5);
 
 // HTML Routes
 	// app.get('/', function(req, res){
