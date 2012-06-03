@@ -1,8 +1,9 @@
 style
     #hiddenCanvas {display: none}
     #displayCanvas {
-        background-image: url(../../examples/santa.jpg);  
+        background-image: url(../../examples/photo.jpg);  
         background-repeat: no-repeat; 
+        background-position: left -20px;
     }
 .container
     header#overview.jumbotron
@@ -10,10 +11,10 @@ style
 
     .row
         .span5
-            video#sourceVideo(src='/examples/video.ogv', controls='true')
-            canvas#hiddenCanvas(width='320', height='192')
+            video#sourceVideo(src='/examples/mdy.m4v', width='320', height='192', controls='true')
+            canvas#hiddenCanvas(width='640', height='386')
         .span5
-            canvas#displayCanvas(width='320', height='192')
+            canvas#displayCanvas(width='640', height='386')
 
 script(type='text/javascript')
     var sourceVideo = document.getElementById("sourceVideo");
@@ -50,7 +51,7 @@ script(type='text/javascript')
         var g = frame.data [i * 4 + 1];
         var b = frame.data [i * 4 + 2];
         
-        if(g > 100 && r > 100 && b < 43){  
+        if(g > 110 && g < 200 && r < 190 && r > 100 && b < 200 && b > 110){  
         frame.data[i * 4 + 3] = 0; 
         } 
             }

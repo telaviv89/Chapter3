@@ -1,10 +1,10 @@
 .container
     header#overview.jumbotron
-        h1 HTML5 Video with custom controls
+        h2 HTML5 Video with custom controls
         .row
-          video(id='myVideo', width='320', height='240', controls, poster='examples/sanfran.jpg', src='examples/sanfran.m4v')
+          video(id='myVideo', width='480', controls, height='360', poster='examples/sanfran.jpg', src='examples/sanfran.m4v')
             track(src="/examples/subtitles.vtt", type="text/vtt", kind="subtitles", srclang="en", label="English", default)
-          div
+          div(style='margin-bottom:30px)
      button.button.skipBack skip back
               button.button.stop stop
               button.button.play play
@@ -67,4 +67,4 @@ script(type='text/javascript')
          myVideoEl.volume = Math.round((myVideoEl.volume -0.1)*10)/10;
          }
     });
-    //document.querySelector('#myVideo').controls = false;
+    document.querySelector('#myVideo').controls = false;
